@@ -13,23 +13,23 @@ on:
       tf-api-token:
         required: true
 
-env:
-  TF_WORKSPACE: ${{ inputs.workspace-name }} # Sets the TF Workspace to use
-
 jobs:
   terraform-plan:
     name: ${{ inputs.env }}
     runs-on: ubuntu-latest
+    environment: ${{ inputs.env }}
     timeout-minutes: 10
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Set Terraform ${{ inputs.env }} Workspace
+        run: sed -i 's/$TF_WORKSPACE/${{ inputs.workspace-name }}/' main.tf
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: 1.5.7
           cli_config_credentials_token: ${{ secrets.tf-api-token }}
 
       - name: Terraform Format
@@ -37,26 +37,22 @@ jobs:
         id: fmt
         run: terraform fmt -check
 
-      - name: Show selected Terraform Workspace
-        run: echo $TF_WORKSPACE
-
       - name: Terraform Init
         continue-on-error: true
         id: init
         run: terraform init
 
-      - name: List Terraform Workspaces
-        run: terraform workspace list
-
       - name: Terraform Validate
         continue-on-error: true
         id: validate
-        run: terraform validate
+        run: terraform validate -no-color
 
       - name: Terraform Plan
         continue-on-error: true
         id: plan
-        run: terraform plan --var-file=vars/${{ inputs.env }}.tfvars -no-color
+        run: |
+          terraform plan --var-file="vars/${{ inputs.env }}.tfvars"
+
 
       - name: "Post Plan to PR"
         if: github.event_name == 'pull_request'
