@@ -1,0 +1,48 @@
+name: "Terraform Apply Template"
+
+on:
+  workflow_call:
+    inputs:
+      env:
+        required: true
+        type: string
+      workspace-name:
+        required: true
+        type: string
+    secrets:
+      tf-api-token:
+        required: true
+
+env:
+  TF_WORKSPACE: ${{ inputs.workspace-name }} # Sets the TF Workspace to use
+
+jobs:
+  terraform-apply:
+    name: ${{ inputs.env }}
+    environment: ${{ inputs.env }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.7
+          cli_config_credentials_token: ${{ secrets.tf-api-token }}
+
+      - name: Show selected Terraform Workspace
+        run: echo $TF_WORKSPACE
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: List Terraform Workspaces
+        run: terraform workspace list
+
+      - name: Terraform Apply
+        id: apply
+        run: terraform apply --var-file=vars/${{ inputs.env }}.tfvars --auto-approve
