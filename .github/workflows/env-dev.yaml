@@ -10,7 +10,7 @@ jobs:
       tf-api-token: ${{ secrets.TF_API_TOKEN }}
     with:
       env: dev
-      workspace-name: cloud_datawarehouse-tf
+      workspace-name: dev-cloud-datawarehouse
 
   terraform-apply:
     name: "Terraform Apply Dev"
@@ -20,4 +20,4 @@ jobs:
       tf-api-token: ${{ secrets.TF_API_TOKEN }}
     with:
       env: dev
-      workspace-name: cloud_datawarehouse-tf
+      workspace-name: dev-cloud-datawarehouse
