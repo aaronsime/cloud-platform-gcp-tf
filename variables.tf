@@ -13,7 +13,3 @@ variable "region" {
 variable "environment" {
   description = "The environment for the GCP project"
 }
-
-variable "team" {
-  description = "The team for the GCP project"
-}
