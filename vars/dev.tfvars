@@ -1,4 +1,4 @@
 environment    = "dev"
-project_id     = "dev-environment"
-project_number = "063511067260"
+project_id     = "dev-cloud-warehouse"
+project_number = "478434158240"
 region         = "us-central1"
