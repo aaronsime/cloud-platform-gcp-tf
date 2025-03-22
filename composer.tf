@@ -31,7 +31,7 @@ resource "google_composer_environment" "composer" {
       worker {
         cpu        = 1
         memory_gb  = 2
-        storage_gb = 20
+        storage_gb = 10
         min_count  = 1
         max_count  = 3
       }
