@@ -11,3 +11,13 @@ resource "google_project_service" "cloud-resource-manager-api" {
   project = var.project_id
   service = "cloudresourcemanager.googleapis.com"
 }
+
+resource "google_project_service" "composer" {
+  project = var.project_id
+  service = "composer.googleapis.com"
+}
+
+resource "google_project_service" "cloud_build" {
+  project = var.project_id
+  service = "cloudbuild.googleapis.com"
+}
