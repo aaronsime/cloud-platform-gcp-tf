@@ -20,3 +20,9 @@ resource "google_project_iam_member" "storage_object_admin" {
   role    = "roles/storage.objectAdmin"
   member  = "serviceAccount:${google_service_account.composer_sa.email}"
 }
+
+resource "google_project_iam_member" "composer-worker-ext" {
+  project    = var.project_id
+  role       = "roles/composer.ServiceAgentV2Ext"
+  member     = "serviceAccount:service-${var.project_number}@cloudcomposer-accounts.iam.gserviceaccount.com"
+}
