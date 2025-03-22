@@ -9,9 +9,9 @@ resource "google_composer_environment" "composer" {
   }
 
   timeouts {
-    create = "30m"
-    update = "30m"
-    delete = "30m"
+    create = "120m"
+    update = "120m"
+    delete = "60m"
   }
 
   config {
