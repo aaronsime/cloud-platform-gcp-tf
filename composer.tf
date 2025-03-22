@@ -1,8 +1,8 @@
 resource "google_composer_environment" "composer" {
-  provider = "google-beta"
-  name   = "composer-${var.environment}"
-  region = var.region
-  project = var.project_id
+  provider = google-beta
+  name     = "composer-${var.environment}"
+  region   = var.region
+  project  = var.project_id
 
   storage_config {
     bucket = ""
@@ -17,9 +17,24 @@ resource "google_composer_environment" "composer" {
   config {
     environment_size = "ENVIRONMENT_SIZE_SMALL"
 
-    node_config {
-      machine_type          = "e2-medium"
-      service_account       = google_service_account.composer_sa.email
+    workloads_config {
+      scheduler {
+        cpu        = 1
+        memory_gb  = 2
+        storage_gb = 10
+      }
+      web_server {
+        cpu        = 1
+        memory_gb  = 2
+        storage_gb = 10
+      }
+      worker {
+        cpu        = 1
+        memory_gb  = 2
+        storage_gb = 20
+        min_count  = 1
+        max_count  = 3
+      }
     }
 
     software_config {
@@ -27,6 +42,10 @@ resource "google_composer_environment" "composer" {
       airflow_config_overrides = {
         core-dags_are_paused_at_creation = "True"
       }
+    }
+
+    node_config {
+      service_account = google_service_account.composer_sa.email
     }
   }
 }
