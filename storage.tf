@@ -7,14 +7,3 @@ resource "google_storage_bucket" "outbound_bucket" {
 
   public_access_prevention = "enforced"
 }
-
-resource "google_storage_bucket_object" "create_folder_placeholders" {
-  for_each = toset([
-    "raw/olist/incoming/.keep",
-    "archive/olist/.keep"
-  ])
-
-  name   = each.value
-  bucket = google_storage_bucket.outbound_bucket.name
-  source = "terraform/files/.keep"
-}
