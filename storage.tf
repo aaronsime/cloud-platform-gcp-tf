@@ -16,5 +16,5 @@ resource "google_storage_bucket_object" "create_folder_placeholders" {
 
   name   = each.value
   bucket = google_storage_bucket.outbound_bucket.name
-  content = ""
+  source = "terraform/files/.keep"
 }
