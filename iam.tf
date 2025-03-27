@@ -29,7 +29,7 @@ resource "google_project_iam_member" "composer-worker-ext" {
 
 # Service for the Github Actions
 resource "google_service_account" "github_actions_sa" {
-  account_id   = "github-actions-cloud-orchestration"
+  account_id   = "github-actions-sa"
   display_name = "Github Actions Service Account"
 }
 
