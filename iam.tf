@@ -90,3 +90,9 @@ resource "google_project_iam_member" "cloud_run_developer" {
   role    = "roles/run.developer"
   member  = "serviceAccount:${google_service_account.cloud_sa.email}"
 }
+
+resource "google_project_iam_member" "cloud_run_artifact_reader" {
+  project = "dev-cloud-warehouse-dev"
+  role    = "roles/artifactregistry.reader"
+  member  = "serviceAccount:service-478434158240@serverless-robot-prod.iam.gserviceaccount.com"
+}
