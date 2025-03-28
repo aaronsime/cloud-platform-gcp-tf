@@ -21,3 +21,23 @@ resource "google_project_service" "cloud_build" {
   project = var.project_id
   service = "cloudbuild.googleapis.com"
 }
+
+resource "google_project_service" "scheduler_api" {
+  project = var.project_id
+  service = "cloudscheduler.googleapis.com"
+}
+
+resource "google_project_service" "cloudfunctions" {
+  project = var.project_id
+  service = "cloudfunctions.googleapis.com"
+}
+
+resource "google_project_service" "bigquerydatatransfer" {
+  project = var.project_id
+  service = "bigquerydatatransfer.googleapis.com"
+}
+
+resource "google_project_service" "eventarc" {
+  project = var.project_id
+  service = "eventarc.googleapis.com"
+}

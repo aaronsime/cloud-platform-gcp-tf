@@ -41,3 +41,52 @@ resource "google_artifact_registry_repository_iam_member" "github_sa_gar_writer"
   repository = google_artifact_registry_repository.cloud_orchestration.name
   member     = "serviceAccount:${google_service_account.github_actions_sa.email}"
 }
+
+
+# Cloud service account to manage snowflake ingestion and orchestration
+resource "google_service_account" "cloud_sa" {
+  account_id   = "cloud-sa"
+  display_name = "Cloud Service Account"
+}
+
+resource "google_project_iam_member" "secret_accessor" {
+  project = var.project_id
+  role    = "roles/secretmanager.secretAccessor"
+  member  = "serviceAccount:${google_service_account.cloud_sa.email}"
+}
+
+resource "google_project_iam_member" "invoker" {
+  project = var.project_id
+  role    = "roles/run.invoker"
+  member  = "serviceAccount:${google_service_account.cloud_sa.email}"
+}
+
+resource "google_project_iam_member" "pubsub_publisher" {
+  project = var.project_id
+  role    = "roles/pubsub.publisher"
+  member  = "serviceAccount:${google_service_account.cloud_sa.email}"
+}
+
+resource "google_project_iam_member" "cloud_function_invoker" {
+  project = var.project_id
+  role    = "roles/cloudfunctions.invoker"
+  member  = "serviceAccount:${google_service_account.cloud_sa.email}"
+}
+
+resource "google_project_iam_member" "event_receiver" {
+  project = var.project_id
+  role    = "roles/eventarc.eventReceiver"
+  member  = "serviceAccount:${google_service_account.cloud_sa.email}"
+}
+
+resource "google_project_iam_member" "log_writter" {
+  project = var.project_id
+  role    = "roles/logging.logWriter"
+  member  = "serviceAccount:${google_service_account.cloud_sa.email}"
+}
+
+resource "google_project_iam_member" "cloud_run_developer" {
+  project = var.project_id
+  role    = "roles/run.developer"
+  member  = "serviceAccount:${google_service_account.cloud_sa.email}"
+}

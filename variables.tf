@@ -13,3 +13,9 @@ variable "region" {
 variable "environment" {
   description = "The environment for the GCP project"
 }
+
+variable "service" {
+  description = "Service Name. Eg. cloud-scheduler"
+  type        = string
+  default     = "cloud-scheduler"
+}
