@@ -51,7 +51,8 @@ jobs:
         continue-on-error: true
         id: plan
         run: |
-          terraform plan --var-file="vars/${{ inputs.env }}.tfvars"
+          terraform plan --var-file="vars/${{ inputs.env }}.tfvars" \
+            --var "snowflake_password=${{ secrets.snowflake_password }}"
 
 
       - name: "Post Plan to PR"

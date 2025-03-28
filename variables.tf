@@ -19,3 +19,9 @@ variable "service" {
   type        = string
   default     = "cloud-scheduler"
 }
+
+variable "snowflake_password" {
+  description = "password used to log into snowflake"
+  type        = string
+  sensitive   = true
+}

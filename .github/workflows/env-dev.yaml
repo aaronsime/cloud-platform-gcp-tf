@@ -8,6 +8,7 @@ jobs:
     uses: ./.github/workflows/template-terraform-plan.yaml
     secrets:
       tf-api-token: ${{ secrets.TF_API_TOKEN }}
+      snowflake_password: ${{ secrets.SNOWFLAKE_PASSWORD }}
     with:
       env: dev
       workspace-name: dev-cloud-datawarehouse
@@ -18,6 +19,7 @@ jobs:
     uses: ./.github/workflows/template-terraform-apply.yaml
     secrets:
       tf-api-token: ${{ secrets.TF_API_TOKEN }}
+      snowflake_password: ${{ secrets.SNOWFLAKE_PASSWORD }}
     with:
       env: dev
       workspace-name: dev-cloud-datawarehouse
