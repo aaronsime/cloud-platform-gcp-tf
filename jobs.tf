@@ -13,7 +13,7 @@ resource "google_cloud_run_v2_job" "snowflake_ingestion" {
       service_account = google_service_account.cloud_sa.email
       timeout         = "21600s"
       containers {
-        image = "${var.region}-docker.pkg.dev/dev-cloud-warehouse-${var.environment}/cloud-warehouse-snowflake-${var.environment}/cloud-warehouse-snowflake-dev-${var.environment}:latest"
+        image = "${var.region}-docker.pkg.dev/${var.environment}-cloud-warehouse/cloud-warehouse-snowflake-${var.environment}/cloud-warehouse-snowflake-${var.environment}:latest"
 
         resources {
           limits = {
