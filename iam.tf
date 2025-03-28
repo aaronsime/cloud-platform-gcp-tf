@@ -92,7 +92,7 @@ resource "google_project_iam_member" "cloud_run_developer" {
 }
 
 resource "google_project_iam_member" "cloud_run_artifact_reader" {
-  project = "dev-cloud-warehouse-dev"
+  project = var.project_id
   role    = "roles/artifactregistry.reader"
   member  = "serviceAccount:service-478434158240@serverless-robot-prod.iam.gserviceaccount.com"
 }
