@@ -12,6 +12,8 @@ on:
     secrets:
       tf-api-token:
         required: true
+      snowflake_password:
+        required: true
 
 jobs:
   terraform-plan:
