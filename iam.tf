@@ -102,3 +102,9 @@ resource "google_project_iam_member" cloud_function_admin {
   role    = "roles/cloudfunctions.admin"
   member  = "serviceAccount:${google_service_account.cloud_sa.email}"
 }
+
+resource "google_project_iam_member" "service_account_user" {
+  project = var.project_id
+  role    = "roles/iam.serviceAccountUser"
+  member  = google_service_account.cloud_sa.member
+}
