@@ -96,3 +96,9 @@ resource "google_project_iam_member" "cloud_run_artifact_reader" {
   role    = "roles/artifactregistry.reader"
   member  = "serviceAccount:service-478434158240@serverless-robot-prod.iam.gserviceaccount.com"
 }
+
+resource "google_project_iam_member" cloud_function_admin {
+  project = var.project_id
+  role    = "roles/cloudfunctions.admin"
+  member  = "serviceAccount:${google_service_account.cloud_sa.email}"
+}
