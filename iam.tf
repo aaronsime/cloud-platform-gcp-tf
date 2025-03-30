@@ -108,3 +108,10 @@ resource "google_project_iam_member" "service_account_user" {
   role    = "roles/iam.serviceAccountUser"
   member  = google_service_account.cloud_sa.member
 }
+
+# Access for snowflakes service account
+resource "google_storage_bucket_iam_member" "snowflake_stage_list" {
+  bucket = google_storage_bucket.outbound_bucket.name
+  role   = "roles/storage.objectViewer"
+  member = "serviceAccount:mviiqjgowm@sfc-au-1-nla.iam.gserviceaccount.com"
+}
