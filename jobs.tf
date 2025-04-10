@@ -61,7 +61,7 @@ resource "google_cloud_run_v2_job" "transform_dbt" {
       timeout         = "3600s" # 1 hour (adjust as needed)
 
       containers {
-        image = "${var.region}-docker.pkg.dev/${var.environment}-cloud-warehouse/cloud-warehouse-transform-${var.environment}/cloud-warehouse-transform-${var.environment}:latest"
+        image = "${var.region}-docker.pkg.dev/${var.environment}-cloud-warehouse/cloud-warehouse-snowflake-${var.environment}/cloud-warehouse-snowflake-${var.environment}:latest"
 
         resources {
           limits = {
