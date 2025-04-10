@@ -88,16 +88,6 @@ resource "google_cloud_run_v2_job" "transform_dbt" {
           name  = "ENVIRONMENT"
           value = var.environment
         }
-
-        env {
-          name  = "JOB_NAME"
-          value = "refresh_facts"
-        }
-
-        env {
-          name  = "SCHEDULE"
-          value = "daily"
-        }
       }
     }
   }
