@@ -44,3 +44,52 @@ resource "google_cloud_run_v2_job" "snowflake_ingestion" {
     }
   }
 }
+
+resource "google_cloud_run_v2_job" "transform_dbt" {
+  name     = "cloud-scheduler-cloudrun-job-transform-dbt"
+  location = var.region
+
+  labels = {
+    environment = var.environment
+    job         = "dbt_transform"
+    service     = var.service
+  }
+
+  template {
+    template {
+      service_account = google_service_account.cloud_sa.email
+      timeout         = "3600s" # 1 hour (adjust as needed)
+
+      containers {
+        image = "${var.region}-docker.pkg.dev/${var.environment}-cloud-warehouse/cloud-warehouse-transform-${var.environment}/cloud-warehouse-transform-${var.environment}:latest"
+
+        resources {
+          limits = {
+            cpu    = "2"
+            memory = "4096Mi"
+          }
+        }
+
+        env {
+          name  = "PROJECT_ID"
+          value = var.project_id
+        }
+
+        env {
+          name  = "ENVIRONMENT"
+          value = var.environment
+        }
+
+        env {
+          name  = "JOB_NAME"
+          value = "refresh_facts"
+        }
+
+        env {
+          name  = "SCHEDULE"
+          value = "daily"
+        }
+      }
+    }
+  }
+}
