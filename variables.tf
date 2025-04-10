@@ -25,3 +25,9 @@ variable "snowflake_password" {
   type        = string
   sensitive   = true
 }
+
+variable "snowflake_password_run" {
+  description = "password used to run dbt against snowflake"
+  type        = string
+  sensitive   = true
+}

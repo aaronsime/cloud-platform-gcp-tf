@@ -9,6 +9,7 @@ jobs:
     secrets:
       tf-api-token: ${{ secrets.TF_API_TOKEN }}
       snowflake_password: ${{ secrets.SNOWFLAKE_PASSWORD }}
+      snowflake_password_run: ${{ secrets.SNOWFLAKE_PASSWORD_RUN }}
     with:
       env: dev
       workspace-name: dev-cloud-datawarehouse
@@ -20,6 +21,7 @@ jobs:
     secrets:
       tf-api-token: ${{ secrets.TF_API_TOKEN }}
       snowflake_password: ${{ secrets.SNOWFLAKE_PASSWORD }}
+      snowflake_password_run: ${{ secrets.SNOWFLAKE_PASSWORD_RUN }}
     with:
       env: dev
       workspace-name: dev-cloud-datawarehouse

@@ -69,6 +69,15 @@ resource "google_cloud_run_v2_job" "transform_dbt" {
             memory = "4096Mi"
           }
         }
+        env {
+          name = "SNOWFLAKE_PASSWORD_RUN"
+          value_source {
+            secret_key_ref {
+              secret  = google_secret_manager_secret.snowflake_password.secret_id
+              version = "latest"
+            }
+          }
+        }
 
         env {
           name  = "PROJECT_ID"
