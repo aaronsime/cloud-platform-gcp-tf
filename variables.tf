@@ -31,3 +31,8 @@ variable "snowflake_password_run" {
   type        = string
   sensitive   = true
 }
+
+variable "dataset_id" {
+  description = "The dataset ID for the BigQuery dataset"
+  type        = string
+}
