@@ -115,7 +115,6 @@ resource "google_project_iam_member" "bq_admin" {
   member  = "serviceAccount:${google_service_account.cloud_sa.email}"
 }
 
-
 # Access for snowflakes service account
 resource "google_storage_bucket_iam_member" "snowflake_stage_list" {
   bucket = google_storage_bucket.outbound_bucket.name
