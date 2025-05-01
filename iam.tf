@@ -115,3 +115,27 @@ resource "google_storage_bucket_iam_member" "snowflake_stage_list" {
   role   = "roles/storage.objectViewer"
   member = "serviceAccount:mviiqjgowm@sfc-au-1-nla.iam.gserviceaccount.com"
 }
+
+# DBT service account for dev
+resource "google_service_account" "dbt_dev_sa" {
+  account_id   = "dbt-dev-sa"
+  display_name = "dbt service account for dev"
+}
+
+resource "google_bigquery_dataset_iam_member" "editor" {
+  dataset_id = var.dataset_id
+  role       = "roles/bigquery.dataEditor"
+  member     = "serviceAccount:${google_service_account.dbt_dev_sa.email}"
+}
+
+resource "google_bigquery_dataset_iam_member" "viewer" {
+  dataset_id = var.dataset_id
+  role       = "roles/bigquery.dataViewer"
+  member     = "serviceAccount:${google_service_account.dbt_dev_sa.email}"
+}
+
+resource "google_project_iam_member" "bigquery_user" {
+  project = var.project_id
+  role    = "roles/bigquery.user"
+  member  = "serviceAccount:${google_service_account.dbt_dev_sa.email}"
+}
