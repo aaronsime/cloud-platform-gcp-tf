@@ -112,7 +112,7 @@ resource "google_project_iam_member" "service_account_user" {
 resource "google_bigquery_dataset_iam_member" "cr_editor" {
   dataset_id = var.dataset_id
   role       = "roles/bigquery.dataEditor"
-  member     = "serviceAccount:${google_service_account.cloud_sa.member}"
+  member     = "serviceAccount:${google_service_account.cloud_sa.email}"
 }
 
 resource "google_bigquery_dataset_iam_member" "cr_viewer" {
