@@ -109,23 +109,12 @@ resource "google_project_iam_member" "service_account_user" {
   member  = google_service_account.cloud_sa.member
 }
 
-resource "google_bigquery_dataset_iam_member" "cr_editor" {
-  dataset_id = var.dataset_id
-  role       = "roles/bigquery.dataEditor"
-  member     = google_service_account.cloud_sa.email
-}
-
-resource "google_bigquery_dataset_iam_member" "cr_viewer" {
-  dataset_id = var.dataset_id
-  role       = "roles/bigquery.dataViewer"
-  member     = google_service_account.cloud_sa.email
-}
-
-resource "google_project_iam_member" "cr_bigquery_user" {
+resource "google_project_iam_member" "bq_admin" {
   project = var.project_id
-  role    = "roles/bigquery.user"
-  member  = google_service_account.cloud_sa.email
+  role    = "roles/bigquery.admin"
+  member  = "serviceAccount:${google_service_account.cloud_sa.email}"
 }
+
 
 # Access for snowflakes service account
 resource "google_storage_bucket_iam_member" "snowflake_stage_list" {
