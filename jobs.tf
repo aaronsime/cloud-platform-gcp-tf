@@ -1,10 +1,10 @@
-resource "google_cloud_run_v2_job" "snowflake_ingestion" {
-  name     = "cloud-scheduler-cloudrun-job-snowflake-ingestion"
+resource "google_cloud_run_v2_job" "ingestion" {
+  name     = "cloud-scheduler-cloudrun-job-ingestion"
   location = var.region
 
   labels = {
     environment = var.environment
-    job         = "snowflake_ingest"
+    job         = "ingest"
     service     = var.service
   }
 
@@ -31,15 +31,6 @@ resource "google_cloud_run_v2_job" "snowflake_ingestion" {
           value = var.environment
         }
 
-        env {
-          name = "SNOWFLAKE_PASSWORD"
-          value_source {
-            secret_key_ref {
-              secret  = google_secret_manager_secret.snowflake_password.secret_id
-              version = "latest"
-            }
-          }
-        }
       }
     }
   }
@@ -67,15 +58,6 @@ resource "google_cloud_run_v2_job" "transform_dbt" {
           limits = {
             cpu    = "2"
             memory = "4096Mi"
-          }
-        }
-        env {
-          name = "SNOWFLAKE_PASSWORD_RUN"
-          value_source {
-            secret_key_ref {
-              secret  = google_secret_manager_secret.snowflake_password_run.secret_id
-              version = "latest"
-            }
           }
         }
 
