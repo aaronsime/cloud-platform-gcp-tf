@@ -14,6 +14,7 @@ resource "google_pubsub_topic_iam_binding" "allow_sink_publish" {
 
   role    = "roles/pubsub.publisher"
   members = [
-    "cloud-sa@dev-cloud-warehouse.iam.gserviceaccount.com"
-  ]
+  "serviceAccount:cloud-sa@dev-cloud-warehouse.iam.gserviceaccount.com"
+]
+
 }
