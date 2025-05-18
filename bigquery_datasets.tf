@@ -21,3 +21,9 @@ resource "google_bigquery_dataset" "consume_zone" {
   project    = var.project_id
   location   = var.region
 }
+
+resource "google_bigquery_dataset" "error_dataset" {
+  dataset_id = "error_dataset"
+  project    = var.project_id
+  location   = var.region
+}
