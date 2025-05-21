@@ -22,6 +22,11 @@ resource "google_cloud_run_service" "log_agent" {
         }
 
         env {
+          name  = "JOB_NAME"
+          value = "log-agent"
+        }
+
+        env {
           name = "GEMINI_API_KEY"
           value_from {
             secret_key_ref {
