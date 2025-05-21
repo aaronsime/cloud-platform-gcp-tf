@@ -42,6 +42,14 @@ resource "google_artifact_registry_repository_iam_member" "github_sa_gar_writer"
   member     = "serviceAccount:${google_service_account.github_actions_sa.email}"
 }
 
+resource "google_artifact_registry_repository_iam_member" "github_sa_gar_writer_log_agent" {
+  provider   = google-beta
+  project    = var.project_id
+  role       = "roles/artifactregistry.writer"
+  location   = google_artifact_registry_repository.log_agent.location
+  repository = google_artifact_registry_repository.log_agent.name
+  member     = "serviceAccount:${google_service_account.github_actions_sa.email}"
+}
 
 # Cloud service account to manage snowflake ingestion and orchestration
 resource "google_service_account" "cloud_sa" {
