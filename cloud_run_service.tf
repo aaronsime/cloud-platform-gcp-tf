@@ -15,11 +15,24 @@ resource "google_cloud_run_service" "log_agent" {
           name  = "ENVIRONMENT"
           value = var.environment
         }
+
         env {
           name  = "PROJECT_ID"
           value = var.project_id
         }
+
+        env {
+          name = "GEMINI_API_KEY"
+          value_from {
+            secret_key_ref {
+              name = google_secret_manager_secret.gemini_api_key.secret_id
+              key  = "latest"
+            }
+          }
+        }
       }
+
+      service_account_name = google_service_account.cloud_sa.email
     }
   }
 
@@ -28,6 +41,7 @@ resource "google_cloud_run_service" "log_agent" {
     latest_revision = true
   }
 }
+
 
 resource "google_cloud_run_service_iam_member" "allow_pubsub" {
   service  = google_cloud_run_service.log_agent.name

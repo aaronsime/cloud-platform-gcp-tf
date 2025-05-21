@@ -16,6 +16,8 @@ on:
         required: true
       snowflake_password_run:
         required: true
+      gemini_token:
+        required: true
 jobs:
   terraform-apply:
     name: ${{ inputs.env }}
@@ -44,5 +46,6 @@ jobs:
         run: |
           terraform apply --var-file="vars/${{ inputs.env }}.tfvars" \
           --var "snowflake_password=${{ secrets.snowflake_password }}" \
-            --var "snowflake_password_run=${{ secrets.snowflake_password_run }}" \
+          --var "snowflake_password_run=${{ secrets.snowflake_password_run }}" \
+          --var "gemini_token=${{ secrets.gemini_token }}" \
           --auto-approve

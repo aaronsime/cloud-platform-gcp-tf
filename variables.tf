@@ -36,3 +36,9 @@ variable "dataset_id" {
   description = "The dataset ID for the BigQuery dataset"
   type        = string
 }
+
+variable "gemini_api_key" {
+  description = "Gemini API key"
+  type        = string
+  sensitive   = true
+}
