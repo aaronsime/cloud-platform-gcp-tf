@@ -9,7 +9,7 @@ resource "google_cloud_run_service" "log_agent" {
   template {
     spec {
       containers {
-        image = "${var.region}-docker.pkg.dev/${var.environment}-cloud-warehouse/cloud-warehouse-snowflake-${var.environment}/cloud-warehouse-snowflake-${var.environment}:latest"
+        image = "${var.region}-docker.pkg.dev/${var.environment}-cloud-warehouse/cloud-warehouse-snowflake-${var.environment}-log-agent/cloud-warehouse-snowflake-${var.environment}-log-agent:latest"
 
         env {
           name  = "ENVIRONMENT"
