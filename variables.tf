@@ -37,7 +37,7 @@ variable "dataset_id" {
   type        = string
 }
 
-variable "gemini_api_key" {
+variable "gemini_token" {
   description = "Gemini API key"
   type        = string
   sensitive   = true
