@@ -42,3 +42,9 @@ variable "gemini_token" {
   type        = string
   sensitive   = true
 }
+
+variable "target_buckets" {
+  type    = list(string)
+  default = []
+  description = "List of GCS buckets to grant permissions to"
+}

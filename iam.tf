@@ -124,7 +124,9 @@ resource "google_project_iam_member" "bq_admin" {
 }
 
 resource "google_storage_bucket_iam_member" "bucket_admin" {
-  bucket = "outbound-snowflake-dev"
+  for_each = toset(var.target_buckets)
+
+  bucket = each.value
   role   = "roles/storage.admin"
   member = "serviceAccount:${google_service_account.cloud_sa.email}"
 }
