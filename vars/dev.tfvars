@@ -7,4 +7,5 @@ dataset_id     = "raw"
 target_buckets = [
   "outbound-snowflake-dev",
   "dbt-logs-dev",
+  "dbt-manifest-dev-dev-cloud-warehouse"
 ]
