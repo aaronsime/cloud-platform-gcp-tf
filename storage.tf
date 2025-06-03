@@ -21,7 +21,7 @@ resource "google_storage_bucket" "dbt_logs_bucket" {
 # Bucket for storing dbt artifacts
 resource "google_storage_bucket" "dbt_manifest_bucket" {
   project       = var.project_id
-  name          = "dbt-manifest-${var.environment}"
+  name          = "dbt-manifest-${var.environment}-${var.project_id}"
   location      = var.region
   storage_class = "STANDARD"
 
