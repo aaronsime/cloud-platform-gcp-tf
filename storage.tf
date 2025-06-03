@@ -17,3 +17,13 @@ resource "google_storage_bucket" "dbt_logs_bucket" {
 
   public_access_prevention = "enforced"
 }
+
+# Bucket for storing dbt artifacts
+resource "google_storage_bucket" "dbt_manifest_bucket" {
+  project       = var.project_id
+  name          = "dbt-manifest-${var.environment}"
+  location      = var.region
+  storage_class = "STANDARD"
+
+  public_access_prevention = "enforced"
+}
